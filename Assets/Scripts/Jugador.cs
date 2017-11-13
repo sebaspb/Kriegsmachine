@@ -61,7 +61,8 @@ public class Jugador : MonoBehaviour {
         [Tooltip("Slider barra de vida jugador ")]
         public Slider BarraDeVida;
         public static Slider BarraDeVidaStatic;
-
+        [Tooltip("Variable interna para controlar que la funcion gameover solo se ejecute una vez")]
+        bool derrotado = false;
 
         [Space(10)]
         [Header("<OPCIONES DE DISPARO>")]
@@ -189,6 +190,8 @@ public class Jugador : MonoBehaviour {
     // Start sólo se ejecuta una vez.
     void Start ()
         {
+        //La siguiente variable se usa para que el jugador se pueda mover (se usa en caso de que se de click en el botón jugar o volver a jugar).
+        CanvasPantallaFinal.Termino = false;
        
         //Se le indica al listener que debe ignorar el volumen de la música, ésto se explica mejor en la clase
         //Interfaz Menu.
@@ -224,6 +227,9 @@ public class Jugador : MonoBehaviour {
         // Update se llama una vez por cuadro
         void Update ()
         {
+
+        print(CanvasPantallaFinal.Termino);
+
             //Se ajusta el valor actual de la barra de poder.
             BarraDePoder.value = Poder;
 
@@ -618,15 +624,25 @@ public class Jugador : MonoBehaviour {
     void GameOver()
     {
         //Si la salud del jugador es = o menor que 0 quiere decir que ha muerto.
+        
+
         if (SaludJugadorStatic <= 0)
         {
+            //La siguiente variable se usa para que el jugador no se pueda mover
+            CanvasPantallaFinal.Termino = true;
+            if (!derrotado){ 
             //Se instancia el sistema de particulas correspondiente en la posición y rotacion del jugador y se reproduce
             ParticleSystem explosion = Instantiate(Destruccion, transform.position, Quaternion.identity) as ParticleSystem;
+            print("hola");
+            explosion.tag="particula";
+            explosion.loop = false;
             explosion.Play();
+                
             //Las particulas se detruyen luego de la duracion de las mismas.
             Destroy(explosion.gameObject, explosion.duration);
+            }
             //Se informa que el juego terminó y debe llamarse la pantalla final.
-            CanvasPantallaFinal.Termino = true;
+            
             //Se llama la corutina gameover luego de 3 segundos.
             StartCoroutine(MenuGameOver(3));
 
@@ -640,6 +656,11 @@ public class Jugador : MonoBehaviour {
     {
         //se informa que se debe activar el canvas game over y el juego debe pausarse.
         yield return new WaitForSeconds(time);
+        derrotado = true;
+        //Se crea un array para controlar la destruccion de las particulas de la derrota.
+        GameObject[] particulas = GameObject.FindGameObjectsWithTag("particula");
+        foreach (GameObject particula in particulas)
+            Destroy(particula.gameObject);
         CanvasGameover.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
     }
@@ -649,25 +670,25 @@ public class Jugador : MonoBehaviour {
 
 
     //INICIO FUNCION ON COLLISION
-    void OnCollisionEnter(Collision collisionbala)
-    {
-        //Se revida que la colision sea con la bala del enemigo
-        if (collisionbala.gameObject.name == "Misil Enemigo(Clone)")
-        {
+    //void OnCollisionEnter(Collision collisionbala)
+    //{
+    //    //Se revida que la colision sea con la bala del enemigo
+    //    if (collisionbala.gameObject.name == "Misil Enemigo(Clone)")
+    //    {
 
-            SaludJugadorStatic -= Enemigos.DañoCausadoStatic;
-            BarraDeVida.value = SaludJugadorStatic;
+    //        SaludJugadorStatic -= Enemigos.DañoCausadoStatic;
+    //        BarraDeVida.value = SaludJugadorStatic;
 
-            //if (!impactobala.isPlaying)
-            //{
-            //    impactobala.Play();
-            //}
+    //        //if (!impactobala.isPlaying)
+    //        //{
+    //        //    impactobala.Play();
+    //        //}
 
            
 
 
-        }
-    }
+    //    }
+    //}
     //FINAL FUNCION ON COLLISION
 }
 //FINAL CLASE JUGADOR

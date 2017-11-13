@@ -29,7 +29,7 @@ public class Puerta : MonoBehaviour {
 
     void Update()
     {
-        //Si la puntuacion es diferente de 0, no hay enemigos y el spawn esta apagado entonces, el control piso, la variable puedepasar y puedeinvocar
+        //Si la puntuacion es diferente de 0, no hay enemigos y el spawn esta apagado entonces, el control piso y la variable puedepasar
         //cambian
         if (Jugador.PuntuacionStatic != 0)
         {
@@ -40,7 +40,7 @@ public class Puerta : MonoBehaviour {
 
                     Enemigos.controlpiso = false;
                     Enemigos.puedepasar = true;
-                    IAEnemiga.puedeinvocar = true;
+                    
 
                 }
             }

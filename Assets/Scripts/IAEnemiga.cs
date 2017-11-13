@@ -17,12 +17,10 @@ public class IAEnemiga : MonoBehaviour
     public Transform[] PuntosDeSpawn;
     //Variable para comprobar si el sistema de spawn está activo o no
     public static bool spawnactivo = true;
-    //Variable para comprobar si se puede invocar enemigos o no
-    public static bool puedeinvocar= false;
     //Variable que guarda hace cuanto tiempo fue la última aparición.
     private float UltimaAparicion;
     //Variable que indica el tiempo inicial de spawn para los enemigos, por defecto es 7 segundos entre uno y otro para el nivel 1.
-    public static float TiempoEntreSpawn = 10f;
+    public static float TiempoEntreSpawn = 6f;
 
     // Update is called once per frame
     void Update()

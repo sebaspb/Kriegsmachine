@@ -82,10 +82,10 @@ public class Enemigos : MonoBehaviour
     [Range(0, 1)]
     public float VolumenSonidoBala;
 
-    [Tooltip("El daño ocasionado por la bala enemiga")]
-    public float DañoCausado;
-    //Se convierte en estática para poderla llamar desde otros scripts.
-    public static float DañoCausadoStatic;
+    //[Tooltip("El daño ocasionado por la bala enemiga")]
+    //public float DañoCausado;
+    ////Se convierte en estática para poderla llamar desde otros scripts.
+    //public static float DañoCausadoStatic;
     //La siguiente variable estática se usa para saber si el jugador puede pasar por la siguiente puerta o se encuentra bloqueada.
     public static bool puedepasar = false;
 
@@ -155,7 +155,7 @@ public class Enemigos : MonoBehaviour
     {
 
         //Se inicializan las variables estáticas para poderlas modificar en el inspector en tiempo real
-        DañoCausadoStatic = DañoCausado;
+        //DañoCausadoStatic = DañoCausado;
 
         //se inicializan las demas funciones
         IniciarMotor();

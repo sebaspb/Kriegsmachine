@@ -28,7 +28,7 @@ public class InterfazMenu : MonoBehaviour
     public GameObject BotonPausa;
     [Tooltip("Objeto usado como boton continuar")]
     public GameObject BotonContinuar;
-
+    
 
     [Header("<OPCIONES DE AUDIO>")]
     [Space(10)]
@@ -122,7 +122,12 @@ public class InterfazMenu : MonoBehaviour
             BotonContinuar.GetComponent<Button>().enabled = false;
             BotonContinuar.GetComponent<Button>().enabled = true;
             BotonPausa.SetActive(true);
+            //Se asegura que no hallan ventanas abiertas luego de continuar el juego.
             BotonContinuar.SetActive(false);
+            CanvasInstrucciones.SetActive(false);
+            CanvasOpciones.SetActive(false);
+            CanvasResetearProgreso.SetActive(false);
+            CanvasCreditos.SetActive(false);
         }
 
     }
@@ -177,6 +182,7 @@ public class InterfazMenu : MonoBehaviour
         Destroy(as2musica);
         SceneManager.LoadScene(nombreEscena);
         Time.timeScale = 1.0f;
+        
     }
 
     //La funcion salir se llama desde el boton salir, ésta funcion solo se puede apreciar en la build, en el editor no tiene uso.

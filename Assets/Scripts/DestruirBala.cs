@@ -21,12 +21,16 @@ public class DestruirBala : MonoBehaviour {
     //Audiosource usado para el sonido de la bala.
     [Tooltip("Audiosource que contiene el sonido de la destrucción de la bala")]
     public AudioSource AudioSourceDestruirBala;
+    [Tooltip("Daño causado por ésta bala")]
+    public float dañocausado;
 
 
 
 
 
-// Update is called once per frame
+
+
+    // Update is called once per frame
     void Update () {
         //En update se controlan las características del audiosource, se hace aquí para poder editarlas en el inspector.
         AudioSourceDestruirBala.volume = VolumenSonidoDestruirBala;
@@ -36,7 +40,13 @@ public class DestruirBala : MonoBehaviour {
 
     void OnCollisionEnter(Collision colision)
     {
-       
+
+        if (colision.collider.gameObject.CompareTag("Jugador")) {
+
+            Jugador.SaludJugadorStatic -= dañocausado;
+            Jugador.BarraDeVidaStatic.value = Jugador.SaludJugadorStatic;
+        }
+
         //Cuando hay colisión, se instancia el audiosource y se reproduc en el lugar de impacto..
         AudioSource sonido = Instantiate(AudioSourceDestruirBala, transform.position, Quaternion.identity) as AudioSource;
         sonido.Play();

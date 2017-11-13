@@ -50,7 +50,7 @@ public class Puertafinal : MonoBehaviour
             foreach (GameObject enemy in enemies)
                 Destroy(enemy.gameObject);
             
-            //Si aun no se ha hecho se mueven las bombas un piso y se cambia el condicional para que no se derrita.
+            //Si aun no se ha hecho se mueven las bombas un piso y se cambia el condicional para que no se repita.
             if (!realizado) { 
             spawnbombas.transform.position = Vector3.Lerp(spawnbombas.position, finalbombas.position, 2);
             bombaactual.transform.Translate(Vector3.up * 30, Space.World);
