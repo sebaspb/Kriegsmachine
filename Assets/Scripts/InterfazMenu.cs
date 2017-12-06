@@ -24,12 +24,12 @@ public class InterfazMenu : MonoBehaviour
     public GameObject CanvasCreditos;
     [Tooltip("Canvas de la sección resetear progreso")]
     public GameObject CanvasResetearProgreso;
+    [Tooltip("Objeto usado como leaderboard")]
+    public GameObject CanvasLeaderBoard;
     [Tooltip("Objeto usado como boton pausa")]
     public GameObject BotonPausa;
     [Tooltip("Objeto usado como boton continuar")]
     public GameObject BotonContinuar;
-    
-
     [Header("<OPCIONES DE AUDIO>")]
     [Space(10)]
     [Tooltip("Slider usado para controlar el volumen de la música")]
@@ -156,6 +156,15 @@ public class InterfazMenu : MonoBehaviour
         CanvasCreditos.gameObject.SetActive(true);
     }
 
+    //La función activar leaderboard se llama desde el boton leaderboard, su funcion es mostrar el canvas leaderboard.
+    public void ActivarLeaderBoard()
+    {
+        CanvasLeaderBoard.gameObject.SetActive(false);
+        CanvasLeaderBoard.gameObject.SetActive(true);
+    }
+
+
+
     //La función activar resetearprogreso se llama desde el boton resetearprogreso, su funcion es mostrar
     //el canvas resetearprogreso.
     public void ActivarResetearProgreso()
@@ -172,6 +181,15 @@ public class InterfazMenu : MonoBehaviour
         CanvasOpciones.gameObject.SetActive(false);
         CanvasCreditos.gameObject.SetActive(false);
         CanvasResetearProgreso.gameObject.SetActive(false);
+
+    }
+
+    //La función volver2 se llama exclusivamente desde el volver del leaderboard, su funcion es ÚNICAMENTE ocultar el leaderboard.
+    public void Volver2()
+    {
+
+        CanvasLeaderBoard.gameObject.SetActive(false);
+
     }
 
     //Cargar escena nos permite movernos entre escenas se le asignó al boton Jugar y Menú principal, al momento de invocarla

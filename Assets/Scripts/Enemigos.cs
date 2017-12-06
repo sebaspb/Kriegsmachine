@@ -133,6 +133,8 @@ public class Enemigos : MonoBehaviour
     [Header("<OPCIONES DE INTERFAZ>")]
     [Tooltip("Canvas que se mostrará en caso de victoria")]
     public GameObject CanvasVictoria;
+    [Tooltip("Canvas que se mostrará en el canvas victoria para que el jguador ingrese su nombre")]
+    public GameObject CanvasInput;
     //INICIO FUNCION START
     void Start()
     {
@@ -372,15 +374,24 @@ public class Enemigos : MonoBehaviour
 
                 //Si el enemigo que ha perdido toda la vida es el objeto jefe
                 //y ya se ha hablitado en su script, entonces se activa el canvas victoria y el juego se pausa.
-             if (Jefe.esjefe)
+                if (Jefe.esjefe)
                 {
+                    //Se crea el condicional que compara la puntuación actual con la guardada internamente; si es mayor; se actualizará el valor con la puntuación actual.
+                    //ésto se hace para corregir un error que hacía que los puntos ganados al matar al jefe final no contarán para el nuevo record.
+                    if (Jugador.PuntuacionStatic > PlayerPrefs.GetFloat("PuntuacionDelJugador"))
+                    {
+                        PlayerPrefs.SetFloat("PuntuacionDelJugador", Jugador.PuntuacionStatic);
+                    }
+                    {
 
+                        //Se muestra el canvas victoria y el input para el nombre
+                        CanvasVictoria.gameObject.SetActive(true);
+                        CanvasInput.gameObject.SetActive(true);
+                        Time.timeScale = 0.0f;
+                        CanvasPantallaFinal.Termino = true;
 
-                    CanvasVictoria.gameObject.SetActive(true);
-                    Time.timeScale = 0.0f;
-
+                    }
                 }
-
             }
 
             //Si el jugador puede ganar poder, y el poder es < que 99 entonces cada enemigo muerto dará 20 puntos de poder.

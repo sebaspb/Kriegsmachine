@@ -181,10 +181,19 @@ public class Jugador : MonoBehaviour {
 
         //Objeto que se usará como Pantalla de GameOver
         public GameObject CanvasGameover;
+        //objeto que se usará como input del nombre
+        public GameObject CanvasInput;
         //Sistema de partículas usado en caso de muerte
         public ParticleSystem Destruccion;
         //Audiosource que tiene la música de fondo.
         public AudioSource Musica;
+        
+        //El siguiente objeto se ha creado para poderlo ocultar en caso de victoria o derrota y así poder amplicar el tamaño de éstas ventanas sin importar, el tamaño de 
+        //la interfaz del jugador.
+        [Tooltip("Objeto usado como interfaz principal del jugador")]
+        public GameObject CanvasInterfaz;
+
+
 
     //INICIO DE LA FUNCION START
     // Start sólo se ejecuta una vez.
@@ -214,19 +223,30 @@ public class Jugador : MonoBehaviour {
             // Se inicializarán las variables estáticas con el valor asignado en el inspector.
             SaludJugadorStatic = SaludJugador;
             PuntuacionStatic = Puntuacion;
-            
 
-            //Se llama la función IniciarMotor;
-            //Descomentar la siguiente linea para iniciar la funcion iniciar motor, recordar que también se debe modificar la linea que asigna la variable en el update.
-            //IniciarMotor();
+        //Se activa por defecto l ainterfaz del jugador y se oculta la interfas del input.
+        CanvasInterfaz.gameObject.SetActive(true);
+        CanvasInput.gameObject.SetActive(false);
 
-        }
+        //Se llama la función IniciarMotor;
+        //Descomentar la siguiente linea para iniciar la funcion iniciar motor, recordar que también se debe modificar la linea que asigna la variable en el update.
+        //IniciarMotor();
+
+    }
         //FINAL DE LA FUNCION START
 
         //INICIO DE LA FUNCION UPDATE
         // Update se llama una vez por cuadro
         void Update ()
         {
+
+        //Se crea el condicional que oculta la interfaz del jugador en caso de que el bool termino de canvaspantallafinal sea verdadero.
+        if (CanvasPantallaFinal.Termino)
+        {
+
+            CanvasInterfaz.gameObject.SetActive(false);
+
+        }
 
         print(CanvasPantallaFinal.Termino);
 
@@ -408,7 +428,7 @@ public class Jugador : MonoBehaviour {
         //En caso de usar el click izquierdo
         if (Input.GetButtonDown("Fire1"))
         {
-           
+                
 
             //Se comprueba que la bala del cañon no exista
             if (!BalaCañonExiste) { 
@@ -446,9 +466,9 @@ public class Jugador : MonoBehaviour {
             //En caso de dar click con el botón derecho y que se cumpla la condicion para el siguiente disparo
             if (Input.GetButton("Fire2") && MiTiempo > Cadencia)
             {
-            
-            //Se confirma que el audiosource correspondiente NO esté creado
-            if (!AudioSourceSonidoMinigunCreado)
+             
+                //Se confirma que el audiosource correspondiente NO esté creado
+                if (!AudioSourceSonidoMinigunCreado)
                 { 
                     //si NO está creado se procede a crearlo y asignarle el sonido correspondiente.
                     AudioSource AudioSourceSonidoMinigun = gameObject.AddComponent<AudioSource>();
@@ -569,6 +589,9 @@ public class Jugador : MonoBehaviour {
 
     //INICIO CORUTINA CambiarExistenciaBalaCañon
     //Esta corrutina se usa para cambiar la existencia de la bala del cañón y poder disparar de nuevo cuando la bala se ha destruido.
+
+       
+
     IEnumerator CambiarExistenciaBalaCañon(float time)
     {
 
@@ -595,8 +618,9 @@ public class Jugador : MonoBehaviour {
     public void ActualizarPuntuacion()
 
             {
-            //Inicialmente se toma el componente texto del texto puntuación y se le dice que sera igual al contenido de la variable estática puntuación convertido en String.
-            TextoPuntuacion.GetComponent<Text>().text = PuntuacionStatic.ToString();
+      
+        //Inicialmente se toma el componente texto del texto puntuación y se le dice que sera igual al contenido de la variable estática puntuación convertido en String.
+        TextoPuntuacion.GetComponent<Text>().text = PuntuacionStatic.ToString();
 
             //Se creará una nueva variable interna, la cual será igual a la variable guardada en playerprefs "PuntuacionDelJugador";
             float PuntuacionDelJugador;
@@ -604,11 +628,11 @@ public class Jugador : MonoBehaviour {
             print("EL RECORD ACTUAL ES DE: "+ PuntuacionDelJugador);
 
 
-            /*Se revisará si la puntuación actual es mayor a la puntuación guardada en playerprefs
-             * En caso de que así sea, la variable de playerprefs se sobrescribirá con el valor actual de la puntuación 
-             * y quedará registrada como la puntuación más alta; hacerlo de ésta manera garantiza que la puntuación más alta no se reinicia,
-             * cada vez que el jeugo se ejecuta*/
-            if (PuntuacionStatic > PuntuacionDelJugador)
+        /*Se revisará si la puntuación actual es mayor a la puntuación guardada en playerprefs
+         * En caso de que así sea, la variable de playerprefs se sobrescribirá con el valor actual de la puntuación 
+         * y quedará registrada como la puntuación más alta; hacerlo de ésta manera garantiza que la puntuación más alta no se reinicia,
+         * cada vez que el jeugo se ejecuta*/
+        if (PuntuacionStatic > PuntuacionDelJugador)
 
             {
 
@@ -624,10 +648,13 @@ public class Jugador : MonoBehaviour {
     void GameOver()
     {
         //Si la salud del jugador es = o menor que 0 quiere decir que ha muerto.
+
+        
         
 
         if (SaludJugadorStatic <= 0)
         {
+            
             //La siguiente variable se usa para que el jugador no se pueda mover
             CanvasPantallaFinal.Termino = true;
             if (!derrotado){ 
@@ -661,7 +688,9 @@ public class Jugador : MonoBehaviour {
         GameObject[] particulas = GameObject.FindGameObjectsWithTag("particula");
         foreach (GameObject particula in particulas)
             Destroy(particula.gameObject);
+        //se mostrará el canvas gameover y el del input
         CanvasGameover.gameObject.SetActive(true);
+        CanvasInput.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
     }
 

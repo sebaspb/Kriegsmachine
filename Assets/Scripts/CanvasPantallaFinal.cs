@@ -17,19 +17,21 @@ public class CanvasPantallaFinal : MonoBehaviour {
     public Text TextoPuntuacion;
     [Tooltip("El texto de la puntuación máxima registrada.")]
     public Text TextoRecord;
+  
 
     //Se usa una variable privada que controla si el juego ya llegó a su final para usarla como desencadenante en las corutinas.
     //se inicializa como falsa.
     public static bool Termino = false;
 
-	
-	// Update is called once per frame
-	void Update () {
+   
+    // Update is called once per frame
+    void Update () {
+
 
         //Se asigna la variable actual de cada uno de los componentes como texto para mostrarla en pantalla.
         TextoPuntuacion.GetComponent<Text>().text = Jugador.PuntuacionStatic.ToString();
         TextoRecord.GetComponent<Text>().text = PlayerPrefs.GetFloat("PuntuacionDelJugador").ToString();
+
         
-       
     }
 }
