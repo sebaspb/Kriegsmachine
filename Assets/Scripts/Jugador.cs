@@ -230,7 +230,7 @@ public class Jugador : MonoBehaviour {
 
         //Se llama la función IniciarMotor;
         //Descomentar la siguiente linea para iniciar la funcion iniciar motor, recordar que también se debe modificar la linea que asigna la variable en el update.
-        //IniciarMotor();
+        IniciarMotor();
 
     }
         //FINAL DE LA FUNCION START
@@ -284,7 +284,7 @@ public class Jugador : MonoBehaviour {
             FuncionReposoMotor();
 
             //comentar la siguiente linea si la función iniciar motor se ha activado en la función start
-            EstaIniciandoElMotor = false;
+            //EstaIniciandoElMotor = false;
         
             //Inicialmente se comprueba si el motor NO se está iniciando; en caso de que sea así se llamarán las funciones que asignan la interactividad al jugador.  
             if (!EstaIniciandoElMotor)
