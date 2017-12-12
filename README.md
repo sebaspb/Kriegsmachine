@@ -17,4 +17,5 @@ El progreso del juego, las fechas de los diferentes cambios y adiciones se puede
 [Trello del juego](https://trello.com/b/BZeFGE3E/desarollo-del-primer-videojuego)
 
 Link en Medium:
-https://medium.com/@sebaspb0202/english-2eb5cc9c735d
+[Medium](https://medium.com/@sebaspb0202/english-2eb5cc9c735d)
+
