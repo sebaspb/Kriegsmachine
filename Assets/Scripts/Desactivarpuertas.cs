@@ -30,8 +30,10 @@ public class Desactivarpuertas : MonoBehaviour
                 Destroy(Puerta.GetComponent<CapsuleCollider>());
                 Destroy(Puerta.GetComponent<Puerta>());
                 Puerta.GetComponent<Animator>().SetTrigger("Cerrada");
-                
-                
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemigo");
+                foreach (GameObject enemy in enemies)
+                    Destroy(enemy.gameObject);
+
             }
     } 
     }

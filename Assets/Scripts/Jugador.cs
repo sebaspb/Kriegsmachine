@@ -466,7 +466,7 @@ public class Jugador : MonoBehaviour {
             //En caso de dar click con el botón derecho y que se cumpla la condicion para el siguiente disparo
             if (Input.GetButton("Fire2") && MiTiempo > Cadencia)
             {
-             
+                         
                 //Se confirma que el audiosource correspondiente NO esté creado
                 if (!AudioSourceSonidoMinigunCreado)
                 { 

@@ -26,7 +26,8 @@ public class NivelDeDificultad : MonoBehaviour {
     //Ua variable interna que guarda el requisito para el siguiente nivel
     public float requisito;
     //Ina variable interna que guarda los puntos para el nivel 6.
-    private float PuntosNivel6; 
+    private float PuntosNivel6;
+    bool realizado = false;
     // Use this for initialization
     void Start () {
 
@@ -74,51 +75,61 @@ public class NivelDeDificultad : MonoBehaviour {
 
 
         //Si la puntuacion del jugador = requisito se desactiva el spawn y se ejecutan las condiciones.        
-        if (Jugador.PuntuacionStatic == requisito)
+        if (Jugador.PuntuacionStatic >= requisito)
         { IAEnemiga.spawnactivo = false;
 
             //Si el nivel actual es 2, el requisito se actualiza a los puntos para el nivel 3
-            if (NivelActual >= 2)
-            {if (Enemigos.puedepasar)
-                {
+            if (NivelActual >= 2 && NivelActual < 3)
+            {
+                //if (Enemigos.puedepasar)
+                //{
                 requisito = PuntosNivel3;
                 
-                    TextoPuertaDesbloqueada.SetActive(true);
+                  TextoPuertaDesbloqueada.SetActive(true);
                     StartCoroutine(OcultarMensajePuerta(3));
-                }
+                //}
             }
 
             //Si el nivel actual es 3, el requisito se actualiza a los puntos para el nivel 4
-            if (NivelActual >= 3)
-            {if (Enemigos.puedepasar)
-                {
+            if (NivelActual >= 3 && NivelActual < 4)
+            {
+                //if (Enemigos.puedepasar)
+                //{
                 requisito = PuntosNivel4;
                 
-                    TextoPuertaDesbloqueada.SetActive(true);
+                   TextoPuertaDesbloqueada.SetActive(true);
                     StartCoroutine(OcultarMensajePuerta(3));
-                }
+                //}
             }
 
             //Si el nivel actual es 4, el requisito se actualiza a los puntos para el nivel 5
-            if (NivelActual >= 4)
-            { if (Enemigos.puedepasar)
-                {
+            if (NivelActual >= 4 && NivelActual < 5)
+            {
+                //if (Enemigos.puedepasar)
+                //{
                 requisito = PuntosNivel5;
                
                     TextoPuertaDesbloqueada.SetActive(true);
                     StartCoroutine(OcultarMensajePuerta(3));
-                }
+                //}
             }
 
             //Si el nivel actual es 5, el requisito se actualiza a 0, se actualiza el spawn a activo y se cambia el tiempo de spawn a 1.
+            
             if (NivelActual >= 5)
             {
                 IAEnemiga.spawnactivo = true;
-                IAEnemiga.TiempoEntreSpawn = 1.75f;
-                if (Enemigos.puedepasar) { 
+                IAEnemiga.TiempoEntreSpawn = 2.2f;
+                //if (Enemigos.puedepasar) { 
+                requisito = 0;
+                
+                if (!realizado) { 
                 TextoPuertaFinalDesbloqueada.SetActive(true);
-                StartCoroutine(OcultarMensajePuerta(3));
+                    realizado = true;
+                    StartCoroutine(OcultarMensajePuerta(3));
+                 
                 }
+                //}
             }
         
         

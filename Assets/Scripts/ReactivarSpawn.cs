@@ -17,19 +17,19 @@ public class ReactivarSpawn : MonoBehaviour {
             Enemigos.controlpiso = true;
 
         if (NivelDeDificultad.NivelActual == 2) {
-            IAEnemiga.TiempoEntreSpawn = 5;
+            IAEnemiga.TiempoEntreSpawn = 8;
         }
         if (NivelDeDificultad.NivelActual == 3)
         {
-            IAEnemiga.TiempoEntreSpawn = 4;
+            IAEnemiga.TiempoEntreSpawn = 6;
         }
         if (NivelDeDificultad.NivelActual == 4)
         {
-            IAEnemiga.TiempoEntreSpawn = 3;
+            IAEnemiga.TiempoEntreSpawn = 4;
         }
         if (NivelDeDificultad.NivelActual == 5)
         {
-            IAEnemiga.TiempoEntreSpawn = 2;
+            IAEnemiga.TiempoEntreSpawn = 3;
         }
         Destroy(gameObject);
     }

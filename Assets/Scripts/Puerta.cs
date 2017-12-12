@@ -33,17 +33,17 @@ public class Puerta : MonoBehaviour {
         //cambian
         if (Jugador.PuntuacionStatic != 0)
         {
-            if (Enemigos.contadorenemigos == 0)
+            //if (Enemigos.contadorenemigos == 0)
+            //{
+            if (!IAEnemiga.spawnactivo)
             {
-                if (!IAEnemiga.spawnactivo)
-                {
 
-                    Enemigos.controlpiso = false;
+                Enemigos.controlpiso = false;
                     Enemigos.puedepasar = true;
-                    
 
-                }
+
             }
+            //}
 
         }
 
