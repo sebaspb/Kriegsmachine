@@ -15,3 +15,6 @@ Cualquier comentario o ***crítica constructiva*** será agradecida y tomada en 
 
 El progreso del juego, las fechas de los diferentes cambios y adiciones se pueden consultar y seguir en:
 [Trello del juego](https://trello.com/b/BZeFGE3E/desarollo-del-primer-videojuego)
+
+Link en Medium:
+https://medium.com/@sebaspb0202/english-2eb5cc9c735d
